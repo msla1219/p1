@@ -18,7 +18,7 @@ def verify():
         acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
         eth_pk = acct.address
-        eth_sk = acct.key
+        eth_sk = content['sig']
 
         payload = json.dumps(content['payload'])
         eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
@@ -33,7 +33,7 @@ def verify():
         acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
         eth_pk = acct.address
-        eth_sk = acct.key
+        eth_sk = content['sig']
 
         payload = json.dumps(content['payload'])
 
