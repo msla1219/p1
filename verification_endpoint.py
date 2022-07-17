@@ -14,8 +14,6 @@ def verify():
     content = request.get_json(silent=True)
 
     if content['payload']['platform'] == 'Ethereum':
-        eth_account.Account.enable_unaudited_hdwallet_features()
-        acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
         eth_pk = content['payload']['pk']
         eth_sk = content['sig']
