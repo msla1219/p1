@@ -17,7 +17,7 @@ def verify():
         eth_account.Account.enable_unaudited_hdwallet_features()
         acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
-        eth_pk = acct.address
+        eth_pk = content['payload']['pk']
         eth_sk = content['sig']
 
         payload = json.dumps(content['payload'])
@@ -32,7 +32,7 @@ def verify():
         eth_account.Account.enable_unaudited_hdwallet_features()
         acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
-        eth_pk = acct.address
+        eth_pk = content['payload']['pk']
         eth_sk = content['sig']
 
         payload = json.dumps(content['payload'])
