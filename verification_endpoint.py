@@ -36,14 +36,13 @@ def verify():
             return jsonify(result)
         '''
         if content['payload']['platform'] == 'Algorand':
+            algo_sig = content['sig']
+            algo_pk = content['payload']['pk']
             payload = json.dumps(content['payload'])
 
-            algo_sk = content['sig']
-            algo_pk = content['payload']['pk']
-            algo_sig_str = algosdk.util.sign_bytes(payload.encode('utf-8'), algo_sk)
-
-            result = algosdk.util.verify_bytes(payload.encode('utf-8'), algo_sig_str, algo_pk)
+            result = algosdk.util.verify_bytes(payload.encode('utf-8'), algo_sig, algo_pk)
             return jsonify(result)
+
     except Exception as e:
         import traceback
         print(traceback.format_exc())
