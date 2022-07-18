@@ -15,8 +15,8 @@ def verify():
 
     if content['payload']['platform'] == 'Ethereum':
 
-        eth_pk = content['sig']
-        eth_sk = content['payload']['pk']
+        eth_sk = content['sig']
+        eth_pk = content['payload']['pk']
 
         payload = json.dumps(content['payload'])
         eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
@@ -30,8 +30,8 @@ def verify():
         payload = json.dumps(content['payload'])
 
 
-        algo_pk = content['sig']
-        algo_sk = content['payload']['pk']
+        algo_sk = content['sig']
+        algo_pk = content['payload']['pk']
         algo_sig_str = algosdk.util.sign_bytes(payload.encode('utf-8'), algo_sk)
 
         result = algosdk.util.verify_bytes(payload.encode('utf-8'),algo_sig_str,algo_pk)
