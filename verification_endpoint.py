@@ -14,6 +14,7 @@ def verify():
     content = request.get_json(silent=True)
 
     try:
+        '''
         if content['payload']['platform'] == 'Ethereum':
             eth_sk = content['sig']
             eth_pk = content['payload']['pk']
@@ -33,7 +34,7 @@ def verify():
                 result = False
 
             return jsonify(result)
-
+        '''
         if content['payload']['platform'] == 'Algorand':
             payload = json.dumps(content['payload'])
 
