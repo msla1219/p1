@@ -14,9 +14,11 @@ def verify():
     content = request.get_json(silent=True)
 
     if content['payload']['platform'] == 'Ethereum':
+        eth_account.Account.enable_unaudited_hdwallet_features()
+        acct, mnemonic = eth_account.Account.create_with_mnemonic()
 
-        eth_pk = content['payload']['pk']
-        eth_sk = content['sig']
+        eth_pk = acct.address
+        eth_sk = acct.key
 
         payload = json.dumps(content['payload'])
         eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
@@ -27,12 +29,9 @@ def verify():
         return jsonify(result)
 
     if content['payload']['platform'] == 'Algorand':
-        payload = "Sign this!"
+
         payload = json.dumps(content['payload'])
-
-
-        algo_pk = content['payload']['pk']
-        algo_sk = content['sig']
+        algo_sk, algo_pk = algosdk.account.generate_account()
         algo_sig_str = algosdk.util.sign_bytes(payload.encode('utf-8'), algo_sk)
 
         result = algosdk.util.verify_bytes(payload.encode('utf-8'),algo_sig_str,algo_pk)
