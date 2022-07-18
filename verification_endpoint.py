@@ -20,10 +20,14 @@ def verify():
 
             payload = json.dumps(content['payload'])
             eth_encoded_msg = eth_account.messages.encode_defunct(text=payload)
-            eth_sig_obj = eth_account.Account.recover_message(eth_encoded_msg, eth_pk)
+            eth_sig_obj = eth_account.Account.recover_message(eth_encoded_msg, eth_sk)
+
+            print("payload:", payload)
+            print("eth_encoded_msg:", eth_encoded_msg)
+            print("eth_sig_obj:", eth_sig_obj)
 
             # Check if signature is valid
-            if eth_sig_obj.signature.hex() == eth_sk:
+            if payload.strip() == eth_sig_obj:
                 result = True
             else:
                 result = False
